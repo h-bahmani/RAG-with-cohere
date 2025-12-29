@@ -2,7 +2,7 @@ Cohere RAG Chatbot (Multilingual/1024 Dim)
 
 This project is a Multilingual Retrieval-Augmented Generation (RAG) Chatbot built with Cohere for embedding and Gemini for generation, designed to provide intelligent responses in various languages, including Persian.
 
-#Features
+##Features
 
 Multilingual Support: Utilizes Cohere's multilingual embedding models for a more robust, language-agnostic experience.
 
@@ -10,7 +10,7 @@ RAG Architecture: Combines embedding, retrieval, and reranking with Gemini's lan
 
 Dynamic Knowledge Base: The chatbot retrieves context from a Supabase database and ranks the most relevant chunks using Cohere's reranking model.
 
-#Technologies Used
+##Technologies Used
 
 Cohere: Used for generating embeddings and reranking documents to improve the accuracy of responses. This makes the chatbot capable of working with vast, multilingual data sources.
 
