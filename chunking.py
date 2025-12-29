@@ -10,7 +10,6 @@ from datetime import datetime, timezone
 import sys
 import httpx 
 from docx import Document
-# 🚨 افزودن Table
 from docx.table import Table
 from docx.text.paragraph import Paragraph
 from dotenv import load_dotenv, find_dotenv
@@ -131,7 +130,7 @@ class CohereEmbedClient:
         else:
             print("⚠️ Warning: Cohere AsyncClient does not have a close/aclose method.")
 
-# نمونه‌سازی نهایی کلاینت
+
 cohere_embed_client = CohereEmbedClient( 
     COHERE_API_KEY, 
     COHERE_EMBED_MODEL,
@@ -163,7 +162,7 @@ def simple_text_heuristic(chunk: str) -> Dict[str, str]:
 
 
 def chunk_text_by_sentence(text: str, max_size: int = MAX_CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> List[str]:
-    # ... (بدون تغییر) ...
+    
     sentences = re.split(r'(?<=[.?!])\s+', text)
     if not sentences:
         return []
@@ -273,15 +272,15 @@ def extract_table_text(table: Table) -> str:
     """جدول را به فرمت متنی قابل خواندن تبدیل می‌کند."""
     table_data = []
     
-    # 🚨 ایجاد هدر برای خوانایی بهتر جدول (مثلاً: Table X: ...)
+    
     table_data.append("--- TABLE START ---")
     
     for i, row in enumerate(table.rows):
         row_text = []
         for j, cell in enumerate(row.cells):
-            # تمیز کردن متن هر سلول
+            
             cell_content = cell.text.replace('\n', ' ').strip()
-            # فرمت: [Column 1: Value] [Column 2: Value]
+            
             row_text.append(f"[C{j+1}: {cell_content}]")
             
         table_data.append(f"Row {i+1}: {' '.join(row_text)}")
@@ -353,11 +352,11 @@ async def process_and_store_document(url: str, content: str):
 
 
 async def process_local_file(file_path: str):
-    # ... (بدون تغییر) ...
+    
     content = ""
     source_name = os.path.basename(file_path)
     
-    # 🚨 بهبود یافته برای استخراج جدول از docx
+    
     if file_path.lower().endswith('.docx'):
         print(f"📄 Processing DOCX: {source_name}")
         content = extract_text_from_docx(file_path)
@@ -408,14 +407,12 @@ async def main():
         
     finally:
         print("\n🧹 Closing clients...")
-        # 🚨 فراخوانی متد close اصلاح شده
         await cohere_embed_client.close()
 
 
 if __name__ == "__main__":
     
     try:
-        # 🚨 مطمئن شوید که asyncio.run فقط یک بار فراخوانی می‌شود
         asyncio.run(main())
     except ValueError as e:
         print(f"❌ Initialization Error: {e}")
